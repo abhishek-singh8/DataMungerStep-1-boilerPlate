@@ -53,7 +53,7 @@ public class DataMungerTestTask1 {
 	{
         assertNotNull("testGetSplitStringsFailure() , Splitting Queries into tokens returns null value", dataMunger.getSplitStrings("select * from ipl.csv"));
 		
-		assertNotNull("testGetSplitStringsFailure() , Splitting Queries into tokens returns null value", dataMunger.getSplitStrings("Select sum(win_by_runs),city from ipl.csv group by city"));
+		assertNotNull("testGetSplitStringsFailure() , Splitting Queries into tokens returns null value", dataMunger.getSplitStrings("select sum(win_by_runs),city from ipl.csv group by city"));
 		
 	}
 	

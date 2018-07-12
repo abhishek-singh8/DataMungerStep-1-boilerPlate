@@ -340,11 +340,23 @@ public class DataMunger {
 		else {
 			String[] groupBySplit=lowerCaseQueryString.split(" group by ");
 			String afterGroupBy=groupBySplit[1].trim();
-			String[] afterGroupByFields=afterGroupBy.split(",");
-			for(int i=0;i<afterGroupByFields.length;i++) {
-				afterGroupByFields[i]=afterGroupByFields[i].trim();
+			int orderByIndex=afterGroupBy.indexOf(" order by ");
+			if(orderByIndex==-1) {
+				String[] afterGroupByFields=afterGroupBy.split(",");
+				for(int i=0;i<afterGroupByFields.length;i++) {
+					afterGroupByFields[i]=afterGroupByFields[i].trim();
+				}
+				return afterGroupByFields;
 			}
-			return afterGroupByFields;
+			else {
+				String[] beforeOrderBy=afterGroupBy.split(" order by ");
+				String beforeOroupByString=beforeOrderBy[0].trim();
+				String[] afterGroupByFields=beforeOroupByString.split(",");
+				for(int i=0;i<afterGroupByFields.length;i++) {
+					afterGroupByFields[i]=afterGroupByFields[i].trim();
+				}
+				return afterGroupByFields;
+			}
 		}
 	}
 
@@ -389,6 +401,13 @@ public class DataMunger {
 			return returnAggregate;
 		}
 
+	}
+	public static void main(String[] args) {
+		DataMunger dm=new DataMunger();
+		String[]str=dm.getGroupByFields("select winner,season,team1,team2 from ipl.csv where season > 2014 group by season order by team1");
+	    for(int i=0;i<str.length;i++) {
+	    	System.out.println(str[i]);
+	    }
 	}
 	
   
